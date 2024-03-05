@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Age Calculator</title>
+</head>
+<body>
+    <div class="container">
+        <div class="calculator">
+            <h3>Age Calculater<br> <span>Using JavaScript</span></h3>
+            <div class="input">
+                <label >Enter Your Birth</label></br>
+                <input type="date" id="date-time">
+                <button onclick="Agecalculate()">Calculate</button>
+            </div>
+            <p id ='age'></p>
+        </div>
+    </div>
+    <script>
+        let userdate = document.getElementById('date-time');
+        userdate.max = new Date().toISOString().split('T')[0]; // Apear past date & today date
+       let result = document.getElementById('age')
+        function Agecalculate(){
+            let born = new Date(userdate.value)
+
+            let bday= born.getDate()
+            let bmonth = born.getMonth()+1
+            let byear = born.getFullYear()
+
+            let Activedate = new Date()
+
+            let day =Activedate.getDate()
+            let month = Activedate.getMonth()+1 // 1 added because month is start with 0 so +1 calculate 1 for january.
+            let year = Activedate.getFullYear()
+
+             let d1,m1,y1    // store to difference bettween month and year
+
+             y1 = year-byear   //current date - to old year difference
+
+             if(month>=bmonth){
+              m1 = month-bmonth
+
+             }else{
+                y1--
+                m1 =12 + month-bmonth
+
+             }
+
+             if(day>=bday){
+                d1=day-bday
+            }else{  
+          m1--
+          d1 = getDayinMonth(byear,bmonth)+ day-day
+           }
+
+           if(m1<0){
+            m1 = 11
+            y1--
+           }
+
+           result.innerHTML = `you Are ${y1} Years,${m1} months and ${d1} Days Old`
+
+
+
+           function getDayinMonth(y , m){
+            return new Date(y ,m ,0).getDate
+           }
+
+
+
+        }
+    </script>
+    
+</body>
+</html>
